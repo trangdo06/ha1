@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.beans.Transient;
+
 @DisplayName("Retro calculator")
 class CalculatorTest {
 
@@ -88,7 +90,50 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should display an integer for perfect square")
+    void testMulipleSquareRoots(){
+        Calculator calc = new Calculator();
 
-    //TODO hier weitere Tests erstellen
+        calc.pressDigitKey(6);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(5);
+
+        calc.pressUnaryOperationKey("√");
+        String expected="25";
+        String actual= calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should display percentage when mulitplied")
+    void testPercentageOf(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressUnaryOperationKey("%");
+        calc.pressBinaryOperationKey("*");
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected="1";
+        String actual= calc.readScreen();
+        assertEquals(expected, actual);
+    }
+    
+    @Test
+    @DisplayName("should display percentage")
+    void testPercentage(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressUnaryOperationKey("%");
+
+        String expected="0.05";
+        String actual= calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
 }
 
