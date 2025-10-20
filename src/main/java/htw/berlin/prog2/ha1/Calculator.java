@@ -80,9 +80,15 @@ public class Calculator {
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+        if(result % 1 == 0){
+                int intResult= (int) result;
+                screen= Integer.toString(intResult);
+        }else{
         screen = Double.toString(result);
+        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);}
+
         if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        
 
     }
 
